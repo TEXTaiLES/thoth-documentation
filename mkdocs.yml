@@ -35,9 +35,9 @@ extra_javascript:
 nav:
   - Deployment:
 
-    - Basic Installation        : deployment/installation_basic.md
-    - Advanced Installation     : deployment/installation_advanced.md
-    - Deploy with Docker        : deployment/docker.md
+    - Basic Installation   : deployment/installation_basic.md
+    - Advanced Installation: deployment/installation_advanced.md
+    - Deploy with Docker   : deployment/docker.md
 
   - Scene:
 
@@ -49,6 +49,7 @@ nav:
 
     - User Interface   : manual/ui.md
     - Tools            : manual/tools.md
+    - Measurements     : manual/measurements.md
     - Layers           : manual/layers.md
     - Models           : manual/models.md
     - Metadata         : manual/metadata.md

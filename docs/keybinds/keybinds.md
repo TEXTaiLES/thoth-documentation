@@ -2,10 +2,19 @@
 
 This section lists all the keyboard shortcuts provided by THOTH.
 
+## Navigation
+
+Key|Event
+:---|:---
+Left mouse click | Navigate around the object 
+Right mouse click | Navigate perpendicular to the object
+Spacebar (hold) | Enable navigation during tool use
+
 ## Tools
 
 Key|Event
 :---|:---
+M|<img src="../../assets/icons/measure.png" alt="brush" width="20" style="vertical-align:middle; margin-right:6px;"> Select Measure
 B|<img src="../../assets/icons/brush.png" alt="brush" width="20" style="vertical-align:middle; margin-right:6px;"> Select Brush
 E|<img src="../../assets/icons/eraser.png" alt="eraser" width="20" style="vertical-align:middle; margin-right:6px;"> Select Eraser
 L|<img src="../../assets/icons/lasso.png" alt="lasso" width="20" style="vertical-align:middle; margin-right:6px;"> Select Lasso

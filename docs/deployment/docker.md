@@ -8,6 +8,17 @@ The prerequisite to run and deploy ATON + THOTH using Docker is to have [Docker]
     </a>
 </p>
 
+
+### Quick run
+
+The super-quick way to deploy THOTH framework using Docker in a single command is:
+
+```
+docker compose up --build
+```
+
+This will build, run and deploy ATON framework with THOTH integrated as a web-app on local port 8088 using a basic configuration, after a fresh install of the framework (e.g. after first clone from github). Note that this does not require downloading or deploying ATON first, as this is handled by the Dockerfile.
+
 ## Build a Docker image of THOTH
 
 This step allows you to build a docker image which contains ATON + THOTH using the Dockerfile inside the main THOTH folder:

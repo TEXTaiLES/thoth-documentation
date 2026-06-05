@@ -9,6 +9,14 @@ Each tool also has additional adjustable options that can alter its usage, such 
 
 ## Tools
 
+### <img src="../../assets/icons/measure.png" alt="measure" width="20" style="vertical-align:middle; margin-right:6px;"> **Measure (M)**
+
+Creates a measurement on the object, measured in meters.
+
+**Options**
+
+* **Mode**: Selects between euclidean (straight line) and geodesic (around the geometry) measure.
+
 ### <img src="../../assets/icons/brush.png" alt="brush" width="20" style="vertical-align:middle; margin-right:6px;"> **Brush (B)**
 
 Allows the user to paint directly onto 3D surfaces within the scene by holding down.

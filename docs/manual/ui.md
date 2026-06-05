@@ -14,7 +14,7 @@ The settings panel allows for general utility changes, like changing the UI them
 
 Through the layer panel you can access the scene layer and other layer controllers. This way you can edit both the metadata and the visual details of each annotation layer. For more information on layers, refer to the [layers section](../manual/layers.md) and the [scene layer section](../manual/scene_layer.md).
 
-<img src="../../assets/icons/models.png" alt="models" width="20" style="vertical-align:middle; margin-right:6px;"> **Models**
+<img src="../../assets/icons/scene.png" alt="models" width="20" style="vertical-align:middle; margin-right:6px;"> **Models**
 
 Through the model panel you can access each scene model controller. This way you can apply transformations and access other utilities regarding the scene models. For more information on layers, refer to the [models section](../manual/models.md)
 
@@ -25,6 +25,8 @@ The export button exports any changes done to the scene directly to the scene de
 ## Main Tools
 
 The main toolbar contains tools for annotation purposes and history navigation. These include:
+
+<img src="../../assets/icons/measure.png" alt="measure" width="20" style="vertical-align:middle; margin-right:6px;"> **Measure**
 
 <img src="../../assets/icons/brush.png" alt="brush" width="20" style="vertical-align:middle; margin-right:6px;"> **Brush**
 
