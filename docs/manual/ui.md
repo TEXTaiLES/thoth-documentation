@@ -1,41 +1,38 @@
-# User Interface
+# User interface
 
-The THOTH UI is the main entry point for users to interact with the web app. 
+THOTH keeps scene content on the right and editing tools around the main 3D view. Controls that change data remain visible when signed out, but selecting one opens the sign-in dialog.
 
-## Top Toolbar
+## Top toolbar
 
-Through the top toolbar a user can open up panels for various ATON and THOTH utilities.
+- **TEXTaiLES** opens the project website.
+- **Add model** opens the model picker. You can select more than one available model before confirming.
+- **Settings** contains light and dark UI themes.
+- **Info** opens this documentation.
 
-<img src="../../assets/icons/settings.png" alt="settings" width="20" style="vertical-align:middle; margin-right:6px;"> **Settings**
+## Scene structure
 
-The settings panel allows for general utility changes, like changing the UI theme and viewpoint visualization.
+The tree on the right is organized by model. Expand a model to inspect:
 
-<img src="../../assets/icons/layers.png" alt="layers" width="20" style="vertical-align:middle; margin-right:6px;"> **Layers**
+- **Selections**: annotated sets of mesh faces;
+- **Semantic Annotations**: annotations anchored to one surface point;
+- **Measurements**: saved distances and their endpoints;
+- **Artefact**: title, source URL, description, owner, keywords, and copyright;
+- **Transforms**: model translation and rotation;
+- **Metadata**: schema-driven model metadata; and
+- **Sensors**: a reserved model-scoped placeholder. Sensor entries are preserved in scene JSON, but this version does not provide an editing or visualization panel for them.
 
-Through the layer panel you can access the scene layer and other layer controllers. This way you can edit both the metadata and the visual details of each annotation layer. For more information on layers, refer to the [layers section](../manual/layers.md) and the [scene layer section](../manual/scene_layer.md).
+The model row provides actions to focus the camera, export or download model data, and delete the model. Annotation rows provide actions to edit details, toggle visibility, and delete the item. Use the **+** action beside Selections to create a selection for that model.
 
-<img src="../../assets/icons/scene.png" alt="models" width="20" style="vertical-align:middle; margin-right:6px;"> **Models**
+## Main toolbar
 
-Through the model panel you can access each scene model controller. This way you can apply transformations and access other utilities regarding the scene models. For more information on layers, refer to the [models section](../manual/models.md)
+The main toolbar is arranged in three groups:
 
-<img src="../../assets/icons/link.png" alt="export" width="20" style="vertical-align:middle; margin-right:6px;"> **Export**
+1. selection tools: Brush, Eraser, Lasso, and No Tool;
+2. point tools: Measure and Semantic Annotation; and
+3. history: Undo and Redo.
 
-The export button exports any changes done to the scene directly to the scene descriptor. For more information on exporting, refer to the [export section](../manual/export.md).
+Selecting a tool opens its options near the toolbar. Only one editing tool is active at a time. See [Tools](tools.md) for interaction details.
 
-## Main Tools
+## User and export controls
 
-The main toolbar contains tools for annotation purposes and history navigation. These include:
-
-<img src="../../assets/icons/measure.png" alt="measure" width="20" style="vertical-align:middle; margin-right:6px;"> **Measure**
-
-<img src="../../assets/icons/brush.png" alt="brush" width="20" style="vertical-align:middle; margin-right:6px;"> **Brush**
-
-<img src="../../assets/icons/eraser.png" alt="eraser" width="20" style="vertical-align:middle; margin-right:6px;"> **Eraser**
-
-<img src="../../assets/icons/lasso.png" alt="lasso" width="20" style="vertical-align:middle; margin-right:6px;"> **Lasso**
-
-<img src="../../assets/icons/undo.png" alt="undo" width="20" style="vertical-align:middle; margin-right:6px;"> **Undo**
-
-<img src="../../assets/icons/redo.png" alt="redo" width="20" style="vertical-align:middle; margin-right:6px;"> **Redo**
-
-For more information on the tools and history, refer to the [tools](../manual/tools.md) and [history](../manual/history.md) sections respectively.
+The user button in the upper-right opens sign-in or sign-out controls. After authentication, **Export changes** opens scene persistence and download choices. See [Sign in](../scene/login.md) and [Export and download](export.md).

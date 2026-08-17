@@ -1,47 +1,43 @@
-# KEYBINDS
+# Keyboard shortcuts
 
-This section lists all the keyboard shortcuts provided by THOTH.
+Shortcuts are disabled while a THOTH modal dialog is open.
 
-## Navigation
+## Tools and navigation
 
-Key|Event
-:---|:---
-Left mouse click | Navigate around the object 
-Right mouse click | Navigate perpendicular to the object
-Spacebar (hold) | Enable navigation during tool use
+| Key | Action |
+| --- | --- |
+| `B` | Select Brush. |
+| `E` | Select Eraser. |
+| `L` | Select Lasso. |
+| `M` | Select Measure. |
+| `A` | Select Semantic Annotation. |
+| `N` | Select No Tool. |
+| `[` | Decrease Brush/Eraser selector size. |
+| `]` | Increase Brush/Eraser selector size. |
+| Hold `Space` | Pause the editing tool and enable scene navigation. |
 
-## Tools
+Pointer behavior depends on the selected tool. The left mouse button performs the normal action; the right mouse button reverses Brush, Eraser, or Lasso selection behavior.
 
-Key|Event
-:---|:---
-M|<img src="../../assets/icons/measure.png" alt="brush" width="20" style="vertical-align:middle; margin-right:6px;"> Select Measure
-B|<img src="../../assets/icons/brush.png" alt="brush" width="20" style="vertical-align:middle; margin-right:6px;"> Select Brush
-E|<img src="../../assets/icons/eraser.png" alt="eraser" width="20" style="vertical-align:middle; margin-right:6px;"> Select Eraser
-L|<img src="../../assets/icons/lasso.png" alt="lasso" width="20" style="vertical-align:middle; margin-right:6px;"> Select Lasso
-\[|Decrease tool size
-\]|Increase tool size
+## Selections
 
-## Layers
-Key|Event
-:---|:---
-Shift+N|Create new layer
-Shift+S|Edit the scene metadata
-0,1...,9|Select layer 0,1,...,9
-Shift+0,1...,9|Edit metadata for layer 0,1,...,9
+| Key | Action |
+| --- | --- |
+| `Shift+N` | Create a selection for the model under the pointer, or the first model. |
+| `0`–`9` | Activate the selection with that numeric ID. |
+| `Shift+0`–`Shift+9` | Activate that selection and open its details. |
 
-## Models
-Key|Event
-:---|:---
-Shift+A|Add new model
+## Models and export
 
-## Export
-Key|Event
-:---|:---
-Shift+E|Export changes
+| Key | Action |
+| --- | --- |
+| `Shift+A` | Open Add models. |
+| `Shift+E` | Open scene export. |
 
 ## History
 
-Key|Event
-:---|:---
-Ctrl+Z|<img src="../../assets/icons/undo.png" alt="undo" width="20" style="vertical-align:middle; margin-right:6px;"> Undo
-Ctrl+Y|<img src="../../assets/icons/redo.png" alt="redo" width="20" style="vertical-align:middle; margin-right:6px;"> Redo
+| Key | Action |
+| --- | --- |
+| `Ctrl+Z` | Undo the latest local operation. |
+| `Ctrl+Y` | Redo the latest undone operation. |
+
+Only the left `Shift` and left `Control` keys are tracked as modifiers by the current implementation.

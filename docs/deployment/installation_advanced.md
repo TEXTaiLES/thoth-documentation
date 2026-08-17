@@ -1,29 +1,26 @@
-## Advanced Installation
+# Run with PM2
 
-In order to install ATON and THOTH using this method, you must first follow the steps shown in the [Basic Installation section](./installation_basic.md) first.
+PM2 keeps the ATON service running under a process manager. Complete the [native ATON deployment](installation_basic.md), including the optional Exact Geodesic setup if required, before using this page.
 
-<p align="center">
-    <a href = "https://pm2.keymetrics.io/" target="_blank">
-        <img src="../../assets/pm2-logo.png" alt="PM2" width="400"/>
-    </a>
-</p>
+Install PM2 globally:
 
-To install PM2 (on any OS) you should just type on command-line:
-
-```
-npm install pm2 -g
+```sh
+npm install --global pm2
 ```
 
-On debian-based systems (Linux OS servers) you should use sudo before the command, in order to install PM2 globally.
+From the ATON repository root, start the checked-in ecosystem configuration:
 
-Now, you can simply run and deploy all ATON services by typing (from main folder):
-
-```
-pm2 start
+```sh
+pm2 start ecosystem.config.js
 ```
 
-Finally, if you want to stop all services, you can type:
+Useful operational commands are:
 
-```
+```sh
+pm2 status
+pm2 logs
+pm2 restart all
 pm2 stop all
 ```
+
+PM2 does not change THOTH's deployment mode, API routes, storage, or authentication. Those remain controlled by the ATON checkout and THOTH configuration. Use your operating system's PM2 startup integration if the service must return after a machine reboot.

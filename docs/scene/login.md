@@ -1,21 +1,22 @@
-# Logging in
+# Sign in
 
-<p align="center">
-    <img src="../../assets/icons/user.png" alt="User" width="50"/>
-</p>
+Use the user button in the upper-right corner to sign in or out. Authentication controls whether THOTH permits editing; it does not change the scene JSON format.
 
-Once inside a THOTH scene, you will be prompted to **log in**. Logging in will unlock THOTH's editing functionalities: 
+## Local ATON mode
 
-* Toolbox
-* Layer management
-* Model management
-* Collaborative sessions
-* Exporting
+The sign-in dialog uses ATON username/password authentication. User accounts and credentials are managed in the host ATON installation, normally through `config/users.json` or the deployment's mounted ATON configuration.
 
-The recommended default admin user provided by ATON has the following credentials:
+THOTH does not create a default administrator and this documentation does not assume shared demo credentials. Ask the instance administrator for an account.
 
-Username| `ra`
-:---|:---
-**Password**| `ra2020`
+Unauthenticated users can load and inspect local scenes. THOTH requests sign-in when they try to import or delete models, edit transforms or metadata, create or edit annotations, use undo/redo, or export changes.
 
-*Note that you can still view models without logging in in ****view only mode****, without being able to alter any of the scene components.*
+## HESTIA mode
+
+HESTIA mode requires a session before it loads a scene. The dialog offers two independent flows:
+
+- **Login with EGI** starts THOTH's OpenID Connect Authorization Code flow with PKCE.
+- **Login through HESTIA Portal** sends the browser through the Archive Portal, which applies HESTIA's Directus registration and account-status rules.
+
+Both flows return to the same THOTH URL, preserving `scene_id`, `artefact_id`, and other query parameters. THOTH sessions are stored in HTTP-only cookies; service credentials are never sent to browser code.
+
+Signing out of a HESTIA Portal session also clears the shared Directus refresh cookie, so the browser is signed out of the Archive Portal as well.

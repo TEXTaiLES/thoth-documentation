@@ -1,13 +1,10 @@
 # History
 
-By using the Undo/Redo commands and the History panel, you can move to previous/next states in your scene.
+Undo and Redo move through operations performed by the current user during the current browser session.
 
-<img src="../../assets/icons/undo.png" alt="undo" width="20" style="vertical-align:middle; margin-right:6px;"> **Undo**
+- Select **Undo** or press `Ctrl+Z` to apply the inverse of the latest local operation.
+- Select **Redo** or press `Ctrl+Y` to reapply the latest undone operation.
 
-Moves one step back in the undo queue. Press the undo button or use the keyboard shortcut Control + Z. 
+Creating, updating, and deleting models or annotations, changing model transforms, and editing model metadata are represented as reversible operations. Performing a new edit clears the redo stack.
 
-<img src="../../assets/icons/redo.png" alt="redo" width="20" style="vertical-align:middle; margin-right:6px;"> **Redo**
-
-Moves one step forward. Press the redo button or use the keyboard shortcut Control + Y.
-
-It's worth noting that history is stored seperately for each user in a collaborative scene. Undo/Redo commands from each user will affect only their actions and not those of other users.
+History is held in memory: it is not included in scene JSON and is lost on reload. In a collaborative scene, remote operations do not enter your undo stack. Undoing or redoing your own operation broadcasts the resulting change so other connected users see it.

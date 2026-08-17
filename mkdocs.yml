@@ -1,15 +1,15 @@
 # Site information
 site_name: THOTH Documentation
-site_url: https://sitename.example
-site_author: Stelios Alvanos
-site_description: THOTH Documentation
+site_url: https://textailes.github.io/thoth-documentation/
+site_author: TEXTaiLES
+site_description: User, deployment, and developer documentation for the THOTH 3D viewer and annotator
 
 # Copyright
-copyright: Copyright &copy; 2025 TEXTaiLES
+copyright: Copyright &copy; 2026 TEXTaiLES
 
 # Repository
-repo_name: thoth-documentation
-repo_url: https://github.com/TEXTaiLES/thoth-documentation
+repo_name: TEXTaiLES/thoth
+repo_url: https://github.com/TEXTaiLES/thoth
 
 # Config
 theme:
@@ -22,7 +22,7 @@ theme:
 
 # Extra
 extra:
-  social: 
+  social:
     - icon: fontawesome/brands/github
       link: https://github.com/TEXTaiLES/thoth
 
@@ -31,33 +31,36 @@ extra_css:
 extra_javascript:
   - javascripts/extra.js
 
-# Page
+# Pages
 nav:
+  - Home: index.md
+
+  - Getting started:
+    - Open a scene: scene/open_scene.md
+    - Sign in: scene/login.md
+    - Collaborative scenes: scene/collab.md
+
+  - User manual:
+    - User interface: manual/ui.md
+    - Tools: manual/tools.md
+    - Models: manual/models.md
+    - Selections: manual/selections.md
+    - Annotation details: manual/annotations.md
+    - Measurements: manual/measurements.md
+    - Semantic annotations: manual/semantic_annotations.md
+    - Metadata: manual/metadata.md
+    - History: manual/history.md
+    - Export and download: manual/export.md
+
+  - Reference:
+    - Keyboard shortcuts: keybinds/keybinds.md
+    - Scene JSON: scene/scene_structure.md
+    - Internal events and operations: api/events.md
+    - HTTP API: api/rest.md
+
   - Deployment:
-
-    - Basic Installation   : deployment/installation_basic.md
-    - Advanced Installation: deployment/installation_advanced.md
-    - Deploy with Docker   : deployment/docker.md
-
-  - Scene:
-
-    - Opening a scene with THOTH: scene/open_scene.md
-    - Logging in                : scene/login.md
-    - Collaborative             : scene/collab.md
-    
-  - User Manual:
-
-    - User Interface   : manual/ui.md
-    - Tools            : manual/tools.md
-    - Measurements     : manual/measurements.md
-    - Layers           : manual/layers.md
-    - Models           : manual/models.md
-    - Metadata         : manual/metadata.md
-    - History          : manual/history.md
-    - Exporting changes: manual/export.md
-
-  - Keybinds: keybinds/keybinds.md
-
-  # - API:
-  #   - Events: api/events.md
-  #   - REST API: api/rest.md
+    - Native ATON: deployment/installation_basic.md
+    - PM2: deployment/installation_advanced.md
+    - Docker: deployment/docker.md
+    - HESTIA integration: deployment/hestia.md
+    - Configuration reference: deployment/configuration.md

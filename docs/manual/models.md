@@ -1,47 +1,28 @@
 # Models
 
-<p align="center">
-    <img src="../../assets/icons/scene.png" alt="Models" width="50"/>
-</p>
+Each scene contains a `models` object keyed by stable model ID. Every model owns its artefact description, transforms, metadata, selections, measurements, semantic annotations, and sensor references.
 
-## Model overview
+## Add models
 
-The models panel is the main control point for importing, deleting and managing models. On a technical level, this corresponds the **nodes** attached to the root scene.
+Select **Add model** or press `Shift+A`. The picker lists resources available from the active backend:
 
-## Adding models to the scene
+- local mode lists models in the authenticated ATON user's model storage; and
+- HESTIA mode lists HESTIA artefacts exposed by the configured gateway.
 
-You can add new models in the scene by selecting the **Add model button** in the models panel, or by pressing **Shift + A**. 
+THOTH accepts model entries whose resource path ends in `.glb`, `.gltf`, or `.obj`. Select one or more entries and choose **Add models**. THOTH resolves each resource URL and its artefact details, creates the model record, loads the geometry, and focuses the first model when the initial scene finishes loading.
 
-<p align="center">
-    <img src="../../assets/icons/add.png" alt="Add Model" width="50"/>
-</p>
+## Scene-tree actions
 
-Models are, by default retrieved from the local ATON directory and must follow the [specifications defined by ATON](https://osiris.itabc.cnr.it/aton/index.php/tutorials/creating-3d-content-for-aton/).
+- **Focus** moves the camera to the model.
+- **Export model changes** downloads a model-focused artefact-data JSON file. A backend export option is shown only when the configured `artefact_data` endpoint supports `PUT`.
+- **Delete** removes the model and its model-scoped annotations from the current scene state. Undo can restore it before history is lost; deleted records are omitted from exported JSON.
 
-## Managing imported models
+## Artefact details
 
-Once a model is properly imported to your scene, you can manage the following attributes.
+The **Artefact** section is read-only and displays the model title, model URL (`gltf_file`), description, owner, keywords, and copyright. Additional source fields may be retained in JSON even though they are not displayed.
 
-* **Visibility**: You can toggle the visibility of a model using the **visibility icon** on the left of the model controller.
+## Transforms
 
-* **Transforms**: You can modify the position and rotation of a selected object with the respective controls on any 3D axis.
+Open **Transforms** to move or rotate the model with numeric controls or the 3D gizmo. Translation is stored in model-local scene units and rotation in radians. Scale is fixed at `1, 1, 1` and is not part of THOTH's canonical scene format.
 
-Additionally, you can **focus** on a specific model by using the **focus button** for a selected layer. You can also view the meshes attached to each model.
-
-## Deleting models
-
-The user can delete a model by pressing the **Delete button** on the models's controller. This action is reversable. 
-
-## Viewpoints
-
-<p align="center">
-    <img src="../../assets/icons/pov.png" alt="viewpoints" width="50"/>
-</p>
-
-THOTH allows you to view the source images from which the 3D object was reconstructed. 
-
-To view a source image, click on one of the viewpoint spheres in the scene. This will open up a card containing information about the viewpoint (position, target, image). You can then view the image for higher-resolution viewing and downloading.
-
-You can hide the viewpoint spheres from the Viewpoint tab in the settings menu.
-
-*The displayed viewpoints are selected from the object's COLMAP*
+Measurements and semantic annotation points are stored in model-local coordinates, so they remain attached when the model is translated or rotated.

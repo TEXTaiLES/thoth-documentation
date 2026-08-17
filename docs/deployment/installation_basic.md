@@ -1,56 +1,63 @@
-## Basic Installation
+# Native ATON deployment
 
-### Step 1
-The only pre-requisite to run your own instance of ATON on your machine is [Node.js](https://nodejs.org/). You can install it on Windows, Linux, and Mac OS.
+Run THOTH as an ATON web app when you already operate ATON or need direct access to its configuration and storage.
 
-<p align="center">
-    <a href = "https://nodejs.org/en" target="_blank">
-        <img src="../../assets/Node.js-logo.png" alt="Node.js" width="200"/>
-    </a>
-</p>
+## Requirements
 
-### Step 2
-Download a copy of ATON framework from [GitHub](https://github.com/phoenixbf/aton) or grab the zip package. If you are not so familiar with git, dont worry: just grab the [zip](https://codeload.github.com/phoenixbf/aton/zip/refs/heads/master) and extract somewhere on your machine. In general however, the best solution is to git clone the repository: this allows you to periodically update your instance without messing with your custom configuration.
+- Node.js and npm supported by the target ATON checkout;
+- Git; and
+- for Exact Geodesic: Python, a C++17 compiler, and the platform build tools required by `node-gyp`.
 
-To clone the repository using the terminal run:
-```
+The THOTH Docker image is tested against ATON commit `22afaf28bcb6deb57ff1ea8e3737336a5a85d076`. Use that revision when you need parity with the packaged deployment, or validate your chosen ATON revision before release.
+
+## Install
+
+Clone ATON, then place THOTH exactly at `wapps/thoth`:
+
+```sh
 git clone https://github.com/phoenixbf/aton.git
-``` 
-
-<p align="center">
-    <a href = "https://osiris.itabc.cnr.it/aton/" target="_blank">
-        <img src="../../assets/aton-logo.png" alt="ATON" width="150"/>
-    </a>
-</p>
-
-
-### Step 3
-Download a copy of THOTH from [Github](https://github.com/TEXTaiLES/thoth) and place it in the /wapps folder located directly inside the aton folder. Similarly to ATON, either download the [zip](https://github.com/TEXTaiLES/thoth) or clone the repository inside the wapps folder. 
-```
-git clone https://github.com/TEXTaiLES/thoth.git
-```
-
-<p align="center">
-    <a href = "https://github.com/TEXTaiLES/thoth" target="_blank">
-        <img src="../../assets/thoth-logo.png" alt="THOTH" width="150"/>
-    </a>
-</p>
-
-### Step 4
-Launch **setup.bat** (Windows) or execute **setup.sh** (Linux and Mac OS) from the ATON main folder. Alternatively, open your terminal, go to the main ATON folder (`cd /your/ATON/folder/`) and just type this command:
-
-```
+cd aton
+git switch --detach 22afaf28bcb6deb57ff1ea8e3737336a5a85d076
+git clone https://github.com/TEXTaiLES/thoth.git wapps/thoth
 npm install
 ```
 
-This installs and updates all node.js modules required by ATON.
+Local mode is already selected by `wapps/thoth/config/deployment.json`; it needs no THOTH `.env` file. Configure ATON users and storage through ATON's normal configuration.
 
-### Step 5
-Once you have installed all the above prerequisites, you can launch the main ATON service by launching **quickstart.bat** (Windows) or **quickstart.sh** (Linux or Mac OS). Alternatively, you can run the following command from your terminal:
+## Enable Exact Geodesic
+
+Build the native addon:
+
+```sh
+cd wapps/thoth/geodesic/geodesic_addon
+npm ci
+cd ../../../..
 ```
+
+Then install THOTH's gateway loader into this ATON checkout:
+
+```sh
+node wapps/thoth/server/deployment/install-gateway.cjs services/ATON.service.main.js
+```
+
+The installer requires the explicit target path and adds one idempotent loader line. It is not run by `npm start`. This is the only native step that edits an ATON source file, and it is needed only for THOTH's `/api/v2/geodesic/*` routes. If you do not need Exact Geodesic, omit the addon build and loader installation.
+
+## Run
+
+From the ATON root:
+
+```sh
 npm start
 ```
 
-This will run and deploy a basic instance of ATON on your machine.
+Open a known scene:
 
-To verify everything runs properly, navigate to [http://localhost:8080/](http://localhost:8080/) on your web browser. 
+```text
+http://localhost:8080/a/thoth/?scene_id=<scene-id>
+```
+
+The ATON landing page at `http://localhost:8080/` confirms the service is reachable, but it does not select a THOTH scene.
+
+## Update
+
+Update ATON and THOTH as separate repositories. After updating THOTH, rerun `npm ci` in the geodesic addon when its package or native source changed, and rerun the gateway installer. The installer is safe to repeat and does not add duplicate loader lines.

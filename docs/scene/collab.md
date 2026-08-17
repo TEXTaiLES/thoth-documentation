@@ -1,19 +1,23 @@
-# Collaborative
+# Collaborative scenes
 
-THOTH takes after ATON in that it allows for multi-user collaborative sessions in a single scene. In addition to ATON's interactive viewing, THOTH allows for users to view changes made to **layers and models** inside a scene in real-time. 
+THOTH can synchronize edits between users viewing the same ATON Photon room. Collaboration is enabled by the top-level scene property:
 
-<p align="center">
-    <img src="../../assets/icons/vrc.png" alt="Collab" width="50"/>
-</p>
-
-## Collaborative scenes
-
-For project-specific implementation purposes, defining a scene as collaborative is achieved through specifically alterring the scene's json object with the following field:
-
-```
-"collaborative": true
+```json
+{
+  "models": {},
+  "collaborative": true
+}
 ```
 
-Any scene with this attribute will automatically enable **Photon**, ATON's collaborative service, uppon successfully **logging in** a loaded scene. This is done to prevent conflicts between edits performed by multiple users in a given scene. 
+Photon connects after an authenticated user loads the scene. When a user enters the room, an existing participant sends the current exported scene state. Subsequent model, transform, metadata, selection, measurement, and semantic-annotation changes are sent as `thoth.operation` messages.
 
-Excluding that line from the scene object will simply launch the scene in a non-collaborative (singleplayer) environment.
+Each operation contains its target, new and previous values, user ID, and timestamp. Remote changes are applied without entering the recipient's undo history. If two operations affect the same target, THOTH ignores one whose timestamp is older than the latest operation already applied to that target.
+
+## What users should expect
+
+- Changes appear in other connected clients without a page reload.
+- Undo and redo affect only operations in the current user's local history, then broadcast the resulting inverse operation.
+- Export still writes the complete current scene to the configured backend. Real-time synchronization does not replace persistence.
+- A scene with `"collaborative": false`, or without the field, behaves as a single-user scene and does not broadcast THOTH operations.
+
+The collaboration flag belongs at the scene root. It is not a model or annotation property. See [Internal events and operations](../api/events.md) for the wire format.

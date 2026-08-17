@@ -1,25 +1,25 @@
 # Metadata
 
-The scene layer, as well as any created layer in a scene, is paired with a set of metadata. This metadata is meant to describe the scene, along with any models inside it or the selections of each layer respectively.
+Metadata describes a model and is separate from annotation details. Open a model's **Metadata** row in Scene Structure to edit it.
 
-<p align="center">
-    <img src="../../assets/icons/list.png" alt="Metadata" width="50"/>
-</p>
+## Schema-driven editor
 
-You can edit the metadata of the scene layer or any other layer using the **edit metadata** buttons on the scene/layer controller from the **Layer Panel**. You can also open the metadata editor using the shortcuts **Shift + S** or **Shift + {layer id}** respectively.
+Each metadata record has a schema descriptor and an `attributes` object. THOTH loads the configured schema list, validates supported field types, and builds an editor from the selected schema. The bundled fallback is `puc_schema`.
 
-## Schema selection
+Supported schema field types are:
 
-Any of this metadata is formed according to a selected metadata schema which the user can choose when filling the metadata for any layer. The schema must follow a set of specifications as to how it's structured. Current default schema is the ```puc_schema``` which comes with the default THOTH installation.
+- `string`, `text`, `url`, `date`, and `reference`;
+- `integer` and `float`;
+- `bool` or `boolean`;
+- `enum`, `enum-multiple`, or `multienum`; and
+- nested `group` fields.
 
-## Attributes
+Changing the selected schema creates a fresh attribute set with that schema's defaults; it does not map values from the previous schema automatically.
 
-Once you have selected a valid schema, you can edit any of the attributes generated according to the schema. Once you have set the desired values, save the changes to the metadata by pressing the **save changes button**. 
+## Save, export, and download
 
-## Inheritting from the scene layer
+- **Save changes** updates the current scene state and history.
+- **Download metadata** saves the canonical metadata object as local JSON.
+- **Export metadata** appears when the active backend provides a metadata `PUT` operation. In HESTIA mode metadata is normally persisted as part of full scene export, so no separate export button is shown.
 
-<p align="center">
-    <img src="../../assets/icons/scene.png" alt="Scene metadata" width="50"/>
-</p>
-
-You can inherit the metadata schema and values assigned to the scene layers to any selected layer by pressing the respective **inherit metadata button** inside the metadata editor.
+Canonical metadata has the shape `{ "schema": { ... }, "attributes": { ... } }`. See [Scene JSON](../scene/scene_structure.md#metadata).

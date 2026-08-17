@@ -1,20 +1,19 @@
 # Measurements
 
-<p align="center">
-    <img src="../../assets/icons/measure.png" alt="Measurements" width="50"/>
-</p>
+Use the Measure tool (`M`) to select two points on the same model. After THOTH computes the distance, complete the annotation details dialog and choose **Create measurement**. The scene tree then provides edit, visibility, and delete controls.
 
-## Measurement Overview
+Distances are displayed to four decimal places. THOTH uses the scene's model units; deployments should ensure imported models use a consistent real-world scale if values are expected to represent metres.
 
-You can create measurements on the object and attach related information to each one. To make a measurement, select the corresponding <img src="../../assets/icons/measure.png" alt="measure" width="20" style="vertical-align:middle; margin-right:6px;"> **Measure** tool by selecting it from the tool panel, or by pressing the corresponding keybind **(M)**. Then, left-click on the object in two separate locations that you want to measure the distance from and the measurement will be generated automatically.
+## Distance modes
 
-After creating a measurement, you can view the corresponding attributes in the <img src="../../assets/icons/measure.png" alt="measure" width="20" style="vertical-align:middle; margin-right:6px;"> **Measurements** panel. Similar to layers, you edit the visibility, name and description, as well as delete measurements and view the exact distance measured.
+| Mode | Calculation | Requirements |
+| --- | --- | --- |
+| Euclidean | Straight line between the two selected points. | The points must belong to the same model. |
+| Geodesic | Approximate shortest path along connected mesh vertices using A*. | Both points must be on the same mesh and a connected vertex path must exist. |
+| Exact Geodesic | Surface path computed by the native Kirsanov/Mitchell-Mount-Papadimitriou addon. | Both points must be on the same triangular, manifold mesh and the server addon must be installed. |
 
-## Modes
+The approximate mode snaps the endpoints to nearby vertices. Exact mode welds coincident vertices and removes invalid or duplicate triangles before sending a model-local mesh to the same-origin server. It rejects non-manifold edges. The server caches the mesh by ID for later exact queries, but the cache is in memory and may be empty after a restart.
 
-Measurements fall under 2 distinct categories:
+THOTH reports an error instead of creating a measurement when the points span models or meshes, no path exists, the geometry is incompatible, or the exact-geodesic service is unavailable.
 
-- **Euclidean**: Straight line between two points.
-- **Geodesic**: Moves around the geometry.
-
-*Note: Some models don't respond well to the geodesic measure due to mesh limitations. In incompatible cases, a popup will appear informing that no geodesic path has been found.*
+All canonical measurement endpoints are stored in model-local coordinates. The computed display path is runtime data; export stores the endpoints, distance, and distance type.

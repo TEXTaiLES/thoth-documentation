@@ -1,19 +1,34 @@
-# Opening a scene with THOTH
+# Open a scene
 
-To open a scene using the THOTH web app, open the following url on your web browser.
+Open THOTH with a `scene_id` query parameter:
 
+```text
+<base-url>/a/thoth/?scene_id=<scene-id>
 ```
-{base_url}/a/thoth/?s={scene_url}
+
+For a native ATON installation, the default base URL is `http://localhost:8080`. For the default local Docker deployment it is `http://localhost:8054`.
+
+For example:
+
+```text
+http://localhost:8080/a/thoth/?scene_id=samples/venus
 ```
 
-where `base_url` is the base thoth uri and `scene_url` the uri of the scene. The default `base url` is [`http://localhost:8080`](http://localhost:8080). The `scene-uri` includes the user path. For  example, a scene id We use for testing is [`http://localhost:8080/a/thoth/?s=samples/venus`](http://localhost:8080/a/thoth/?s=samples/venus)
+Scene identifiers may contain an owner path, such as `samples/venus`. Encode reserved URL characters if you construct this address programmatically.
 
-*For the version deployed on [Hestia](https://textailes.athenarc.gr/archive), we replace **?s=** with **?id=** for scene access.*
+The optional `artefact_id` parameter links scene export to an existing ECHOES Digital Twin in HESTIA mode:
 
-On success, this is what a loaded page should look like this:
+```text
+https://thoth.example.org/a/thoth/?scene_id=<scene-id>&artefact_id=<artefact-id>
+```
 
-<p align="center">
-    <img src="../../assets/thoth_screenshot.png" alt="Scene Screenshot" width="800"/>
-</p>
+When `artefact_id` is present, a successful scene export is followed by a `PUT` to the configured ECHOES endpoint. The ECHOES artefact must already be registered.
 
-You can create a scene from the ATON front end (shu) or through a post request through the [ATON REST API](../api/rest.md).
+## Access behavior
+
+- In local ATON mode, an unauthenticated user may view a scene, but editing and export actions require sign-in.
+- In HESTIA mode, sign-in is required before the scene can be loaded.
+- If `scene_id` is omitted, THOTH opens without loading a scene.
+- If the scene cannot be found or its content is not valid JSON, THOTH reports the error and does not parse it.
+
+Scenes can be created through the backend before opening them in THOTH. See the [HTTP API](../api/rest.md) and [scene JSON reference](scene_structure.md) for the expected interface and content.
